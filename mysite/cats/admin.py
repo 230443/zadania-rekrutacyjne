@@ -16,6 +16,12 @@ class HuntingAdmin(admin.ModelAdmin):
     inlines = [PreyInline]
 
 
+class CatAdmin(admin.ModelAdmin):
+    readonly_fields = ['is_male']
+    list_display = ('name', 'user', 'is_male', 'color')
+    search_fields = ['name']
+
+
 admin.site.register(Hunting, HuntingAdmin)
-admin.site.register(Cat)
+admin.site.register(Cat, CatAdmin)
 admin.site.register(PreyType)
