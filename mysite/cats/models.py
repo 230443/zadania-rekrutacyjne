@@ -8,6 +8,9 @@ class Cat(models.Model):
     color = models.CharField(max_length=20)
     is_male = models.BooleanField()
 
+    def get_prays_number(self):
+        return Prey.objects.filter(hunting__cat=self).count()
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if Cat.objects.filter(user=self.user).count() < 4:
             super(Cat, self).save()
