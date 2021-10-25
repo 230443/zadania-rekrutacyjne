@@ -5,7 +5,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import permissions
 from rest_framework import viewsets
 
-from .serializers import UserSerializer, GroupSerializer
+from .models import Hunting
+from .serializers import UserSerializer, GroupSerializer, HuntingSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -23,4 +24,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class HuntingViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows hunting to be viewed or edited.
+    """
+    queryset = Hunting.objects.all()
+    serializer_class = HuntingSerializer
     permission_classes = [permissions.IsAuthenticated]

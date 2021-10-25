@@ -23,6 +23,9 @@ class Hunting(models.Model):
     start_date = models.DateTimeField()
     duration = models.DurationField()
 
+    def __str__(self):
+        return "{} at {}".format(self.cat.name, self.start_date.strftime("%m/%d/%Y %H:%M:%S"))
+
 
 class PreyType(models.Model):
     type_name = models.CharField(max_length=20)
@@ -34,3 +37,6 @@ class PreyType(models.Model):
 class Prey(models.Model):
     type = models.ForeignKey(PreyType, on_delete=models.PROTECT)
     hunting = models.ForeignKey(Hunting, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.type.type_name
